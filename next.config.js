@@ -1,6 +1,7 @@
 module.exports = {
   images: {
-    domains: ['www.tmf-group.com'],
+    dangerouslyAllowSVG: true,
+    domains: ['www.tmf-group.com', "rb.gy"],
   },
 
 }
