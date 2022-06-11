@@ -11,7 +11,8 @@ export async function middleware(req) {
         });
         // You could also check for any property on the session object,
         // like role === "admin" or name === "John Doe", etc.
-        if (!session) return NextResponse.rewrite(`${origin}/home`);
+        if (!session) return NextResponse.redirect(`${origin}/home`);
+        // if (!session) return NextResponse.rewrite(`${origin}/home`);
         // If user is authenticated, continue.
     }
 }
