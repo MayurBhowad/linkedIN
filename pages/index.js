@@ -1,11 +1,17 @@
+import { AnimatePresence } from 'framer-motion'
 import { getSession, signOut, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useRecoilState } from 'recoil';
+import { modalState } from '../atoms/modalAtom'
 import Feed from '../components/Feed'
 import Header from '../components/Header'
+import Modal from '../components/modal'
 import Sidebar from '../components/Sidebar'
 
 export default function Home() {
+  const [modalOpen, setModalOpen] = useRecoilState(modalState)
+  const [modalType, setModalType] = useRecoilState(modalState)
   const router = useRouter()
   const { status } = useSession({
     required: true,
@@ -29,6 +35,11 @@ export default function Home() {
           <Feed />
         </div>
         {/* Widgets */}
+        <AnimatePresence>
+          {modalOpen && (
+            <Modal handleClose={() => setModalOpen(false)} type={modalType} />
+          )}
+        </AnimatePresence>
       </main>
     </div>
   )
